@@ -1,0 +1,10 @@
+2017-02-22
+
+Automatic time keeping, and objectives, actions by means of heauristic analysis of all logged data. Which window is open, key-activity, diff between stored file and file to be saved at each save, fetching of meta-data properties from apps as much as possible, x-classname, etc. of not else, are stored event by event in a humongous db-log. Switch tab in browser? wm captures. etc. All this data can be used to reconstruct where time goes.
+
+And finally...
+
+2019-03-13
+
+Actually starts implementing it. First commit.
+

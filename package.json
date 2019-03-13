@@ -1,0 +1,39 @@
+{
+  "name": "decent-dash",
+  "version": "0.6.3",
+  "description": "Time and Workflow Tracking",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "time",
+    "tracking",
+    "automated",
+    "coder",
+    "intell",
+    "coding",
+    "authoring",
+    "systemizing",
+    "invention",
+    "life",
+    "health",
+    "efficiency",
+    "feedback"
+  ],
+  "author": "Oscar Campbell",
+  "license": "ISC",
+  "dependencies": {
+    "@types/node": "^11.11.2",
+    "active-win": "^4.1.0",
+    "fs-extra": "^7.0.1",
+    "qid": "^0.9.11",
+    "typescript": "^3.3.3333",
+    "x11": "^2.3.0"
+  },
+  "devDependencies": {
+    "@types/active-win": "^4.0.0",
+    "@types/fs-extra": "^5.0.5",
+    "colors": "^1.3.3"
+  }
+}

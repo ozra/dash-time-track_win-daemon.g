@@ -1,0 +1,45 @@
+#!/usr/bin/node
+require("colors")
+const TSC = "./node_modules/typescript/bin/tsc"
+
+const targets = {
+    "all": () => {
+        sh(`${TSC}`)
+    },
+    "clean": () => {
+        sh(`rm -rf dist`)
+    }
+}
+
+const say = console.log
+const exec_sync = require("child_process").execSync
+
+function sh(cmd) {
+    say(cmd.white)
+    try {
+        const ret = exec_sync(cmd)
+        say(ret)
+        return ret
+    } catch (err) {
+        say(err.red)
+    }
+}
+
+// // // // // // // //
+let cmd = "all"
+const args = process.argv.slice(2)
+if (args.length > 0) {
+    cmd = args.shift()
+}
+
+// // // // // // // //
+// // // // // // // //
+
+say("Do ".yellow, cmd.cyan, "in", process.cwd())
+
+// // // // //
+main()
+
+function main() {
+    targets[cmd]()
+}
