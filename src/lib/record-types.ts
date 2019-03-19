@@ -46,6 +46,14 @@ export namespace Rs {
         page_title = 8
     }
 
+    // NOTE: serial or similar, which is added to a lut with jsonhash that is
+    // referenced to, instead of output again and again, until deemed time for a
+    // new chapter-header - to make some "catch-up" points then and when
+    // Make it a LRU with just a few cycling chapter-defs, like x amount of
+    // possible backrefs (if one switches between about ten projects - a lot
+    // bigger lookback than that can be kept ofc.)
+    export type ReferenceIdForChaptedDeffedData = string
+
     export type AppName = string
 
     export type Detail = string
@@ -63,4 +71,12 @@ export type EventRecord = [
     Rs.Detail,
     JsonHash
 ]
+
 export type PingRecord = [Rs.Kind.DaemonAlivePing, Rs.Version.v1, Rs.ChronStamp]
+
+export type ChapterHeaderRecord = [
+    Rs.Kind.ChapterHeader,
+    Rs.Version.v1,
+    Rs.ChronStamp,
+    [Rs.ReferenceIdForChaptedDeffedData, JsonHash]
+]

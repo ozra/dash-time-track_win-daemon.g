@@ -1,5 +1,9 @@
 #!/usr/bin/node
 
+const say = console.log
+
+say("discap — distributed capture thoughts")
+
 /**
 
 

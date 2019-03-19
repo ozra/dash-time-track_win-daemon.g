@@ -21,7 +21,9 @@ const dissectors_: DissectorMap = {
         const ret = v.win_title
             .split(/[\s—-]+\./)
             // .join("")
-            .map(v => v.replace(/^[^\w/]\s+/, ""))
+            .map(v =>
+                v.replace(/^[^\w/]\s+/, "").replace(/\s*.Unsupported./, "")
+            )
 
         return {
             app: v.app,
