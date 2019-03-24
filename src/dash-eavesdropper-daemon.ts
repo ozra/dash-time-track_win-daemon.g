@@ -1,10 +1,10 @@
-import { JsonHash } from "./lib/basic-types"
-import { FullIntell, LogRecord, Rs } from "./lib/record-types"
+import { JsonHash } from "./core-lib/basic-types"
+import { FullIntell, LogRecord, Rs } from "./core-lib/record-types"
 import { WriteStream } from "fs-extra"
-import { say, sh, now, openfstream } from "./lib/utils"
+import { say, sh, now, openfstream } from "./core-lib/utils"
 import awin from "active-win"
-import { dissector } from "./lib/winfo-dissector"
-import { load_conf } from "./lib/conf-loader"
+import { dissector } from "./core-lib/winfo-dissector"
+import { load_conf } from "./core-lib/conf-loader"
 
 // TODO check if we can use x11 along for spying — INCLUDING keypresses (activity stats)
 import { do_x11inator } from "./X11inator"
@@ -60,13 +60,22 @@ async function main() {
 }
 
 function init(conf: JsonHash) {
-    say("Ensures working-directory", conf.app_home)
+    init__ensure_paths()
+    init__open_log_stream()
+}
 
-    sh(`mkdir -p "${conf.app_home}/record_log/"`)
+function init__ensure_paths() {
+    const paths = conf.paths
+    say("Ensures working-directories in", conf.app_home)
+    // TODO: we should just iterate all the paths in "paths":
+    sh(`mkdir -p "${paths.event_records}/ "${paths.fs_tags}/"`)
+}
 
-    state.log_stream = openfstream(
-        conf.app_home + "/record_log/" + "at_" + now()
-    )
+function init__open_log_stream() {
+    const paths = conf.paths
+    // TODO should roll every hour or whatever
+    const ts = now()
+    state.log_stream = openfstream(`${paths.event_records}/at_${ts}`)
 }
 
 // // // // //

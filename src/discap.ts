@@ -1,9 +1,35 @@
 #!/usr/bin/node
 
+import os from "os"
+import { load_conf } from "./core-lib/conf-loader"
+import * as TagFile from "./discap-lib/tag-file"
+
 const say = console.log
 
 say("discap — distributed capture thoughts")
 
+const conf = load_conf()
+
+const arg_handlers = [TagFile]
+
+function main() {
+    const args = process.argv.slice(2)
+    // TODO filter out initial / global flags from args
+    const scored = arg_handlers
+        .map(v => [v.handling_score(args, conf), v])
+        // .sort()
+        // .filter(Boolean)
+        .filter(v => v[0] > 0)
+
+    if (scored.length === 0) {
+        throw Error("don't understand the args, sorry!")
+    } else if (scored.length > 1) {
+        // TODO only if all same weighting?)
+        throw Error("match more than one handler!!: ")
+    }
+
+    ;(scored[0]![1]! as any).handle(args, conf)
+}
 /**
 
 
@@ -50,6 +76,9 @@ say("discap — distributed capture thoughts")
 
 - !qid / !ref
     - generate a random qid for referncing (is also stored w timestamp and any additional text)
+
+- !tag
+    - tag a file with a mini-qid put into a fs-tags log for reference, it can be used for indexing, hash-tagging, associating with other files, url-bookmarks and objects
 
 - !ls
     - list "issues" (entries that heuristically might be this or that, allow corrections simply)

@@ -24,11 +24,11 @@
   "author": "Oscar Campbell",
   "license": "ISC",
   "dependencies": {
-    "@types/node": "^11.11.2",
+    "@types/node": "^11.11.4",
     "active-win": "^4.1.0",
     "fs-extra": "^7.0.1",
     "qid": "^0.9.11",
-    "typescript": "^3.3.3333",
+    "typescript": "^3.3.4000",
     "x11": "^2.3.0"
   },
   "devDependencies": {
